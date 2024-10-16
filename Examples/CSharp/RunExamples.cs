@@ -1,54 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Aspose.Pdf.Examples.CSharp.AsposePDF.Tables;
+using System;
 using System.IO;
-using System.Text;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Annotations;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Attachments;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Bookmarks;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.DocumentConversion;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.DocumentConversion.PDFToHTMLFormat;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Forms;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Images;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.LinksActions;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Operators;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Pages;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.SecuritySignatures;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.StampsWatermarks;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Tables;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Text;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.WorkingDocuments;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Working_Document;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Miscellaneous;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Graphs;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Headings;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.TechnicalArticles;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.QuickStart;
-
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Annotations;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Attachments;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Bookmarks;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Forms;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Images;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Printing;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.StampsWatermarks;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Text;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.WorkingDocument;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.LinksActions;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.SecuritySignatures;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.Append;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.ConcatenateDocuments;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.DeletePages;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.ExtractPages;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.InsertPages;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.MakeBooklet;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.MakeNUp;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.SplitPages;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.Pages.ManipulatePageProperties;
-using Aspose.Pdf.Examples.CSharp.AsposePDFFacades.TechnicalArticles;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Working_with_TaggedPDFs;
-using Aspose.Pdf.Examples.CSharp.AsposePdfFacades.Security_Signatures;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Working_With_XML_XSLT;
-using Aspose.Pdf.Examples.CSharp.AsposePDF.Stamps_Watermarks;
 
 namespace Aspose.Pdf.Examples.CSharp
 {
@@ -69,7 +21,7 @@ namespace Aspose.Pdf.Examples.CSharp
 
             //QuickStart
             //=====================================================
-            HelloWorld.Run();
+            //HelloWorld.Run();
             //LoadLicenseFromFile.Run();
             //LoadLicenseFromStreamObject.Run();
             //SetLicenseUsingEmbeddedResource.Run();
@@ -322,6 +274,7 @@ namespace Aspose.Pdf.Examples.CSharp
 
             #region Tables
             // =====================================================
+            ResultSlips.Run();
             //AddImageInATableCell.Run();
             //AddRepeatingColumn.Run();
             //AddSVGObject.Run();
@@ -344,7 +297,7 @@ namespace Aspose.Pdf.Examples.CSharp
             #endregion
 
             #region TechnicalArticles
-             // =====================================================
+            // =====================================================
             //CreatePDFPortfolio.Run();
             //ExtractFilesFromPortfolio.Run();
             //RemoveFilesFromPortfolio.Run();
@@ -360,7 +313,7 @@ namespace Aspose.Pdf.Examples.CSharp
             //AddTextBorder.Run();
             //AddTooltipToText.Run();
             //AddTransparentText.Run();
-            //Aspose.Pdf.Examples.CSharp.AsposePDF.Text.AddText.Run();
+            // Aspose.Pdf.Examples.CSharp.AsposePDF.Text.AddText.Run();
             //AsposePDF.Text.CustomTabStops.Run();
             //CreateMultiColumnPdf.Run();
             //EmbedStandardType1Fonts.Run();
@@ -476,8 +429,13 @@ namespace Aspose.Pdf.Examples.CSharp
 
             // Stop before exiting
 
-            Console.WriteLine("\n\nProgram Finished. Press any key to exit....");
-            Console.ReadKey();
+            //Console.WriteLine("\n\nProgram Finished. Press any key to exit....");
+            //Console.ReadKey();
+        }
+
+        public static String GetDataDir_AsposePdf_ResultSlips()
+        {
+            return Path.GetFullPath(GetDataDir_Data() + "AsposePDF/ResultSlips/");
         }
         public static String GetDataDir_AsposePdf_TechnicalArticles()
         {

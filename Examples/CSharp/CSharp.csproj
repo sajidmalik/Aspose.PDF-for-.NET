@@ -485,6 +485,7 @@
     <Compile Include="AsposePDF\Tables\RemoveMultipleTables.cs" />
     <Compile Include="AsposePDF\Tables\RemoveTable.cs" />
     <Compile Include="AsposePDF\Tables\ReplaceTable.cs" />
+    <Compile Include="AsposePDF\Tables\ResultSlips.cs" />
     <Compile Include="AsposePDF\Tables\RoundedCornerTable.cs" />
     <Compile Include="AsposePDF\Tables\AutoFitToWindow.cs" />
     <Compile Include="AsposePDF\Tables\AddTable.cs" />

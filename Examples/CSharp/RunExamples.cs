@@ -11,13 +11,11 @@ namespace Aspose.Pdf.Examples.CSharp
         {
             Console.WriteLine("Open RunExamples.cs. \nIn Main() method uncomment the example that you want to run.");
             Console.WriteLine("=====================================================");
-            //Uncomment the one you want to try out
 
-            //=====================================================
-            //=====================================================
-            //Aspose.Pdf
-            //=====================================================
-            //=====================================================
+            ResultSlips resultSlips = new ResultSlips();
+            resultSlips.GenerateResultSlips();
+
+            #region AsposeCode
 
             //QuickStart
             //=====================================================
@@ -274,7 +272,6 @@ namespace Aspose.Pdf.Examples.CSharp
 
             #region Tables
             // =====================================================
-            ResultSlips.Run();
             //AddImageInATableCell.Run();
             //AddRepeatingColumn.Run();
             //AddSVGObject.Run();
@@ -426,11 +423,6 @@ namespace Aspose.Pdf.Examples.CSharp
             //BreakfastMenuUsingXmlAndXslt.Run();
             //HelloWorldPDFUsingXmlAndXslt.Run();
             #endregion
-
-            // Stop before exiting
-
-            //Console.WriteLine("\n\nProgram Finished. Press any key to exit....");
-            //Console.ReadKey();
         }
 
         public static String GetDataDir_AsposePdf_ResultSlips()
@@ -588,4 +580,6 @@ namespace Aspose.Pdf.Examples.CSharp
             return Path.Combine(startDirectory, "Data\\");
         }
     }
+
+    #endregion AsposeCode
 }

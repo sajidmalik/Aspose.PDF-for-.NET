@@ -1,6 +1,7 @@
 ﻿using Aspose.Pdf.Text;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Aspose.Pdf.Examples.CSharp.AsposePDF.Tables
 {
@@ -16,35 +17,48 @@ namespace Aspose.Pdf.Examples.CSharp.AsposePDF.Tables
             Learners = new List<Learner>()
             {
                 new Learner() { Name = "Russel Crowe", Uln = 4444444444 },
-                new Learner() { Name = "Ricky Ponting", Uln = 5555555555 },
-                new Learner() { Name = "Sylvester Stallone", Uln = 3333333333 },
-                new Learner() { Name = "Imran Khan", Uln = 1111111111 }
+                //new Learner() { Name = "Ricky Ponting", Uln = 5555555555 },
+                //new Learner() { Name = "Sylvester Stallone", Uln = 3333333333 },
+                //new Learner() { Name = "Imran Khan", Uln = 1111111111 }
             };
         }
 
         public void GenerateResultSlips()
         {
             string dataDir = RunExamples.GetDataDir_AsposePdf_ResultSlips();
+            string imgDir = RunExamples.GetDataDir_AsposePdf_Images();
             string outputFilename = Guid.NewGuid().ToString();
 
             for (var i = 0; i < Learners.Count; i++)
             {
                 var page = Document.Pages.Add();
-                page.PageInfo.IsLandscape = true;
+                SetupPageProperties(page);
 
-                Aspose.Pdf.Rectangle r = page.MediaBox;
-                double newHeight = r.Width;
-                double newWidth = r.Height;
-                double newLLX = r.LLX;
+                int lowerLeftX = 90;
+                int lowerLeftY = 475;
+                int upperRightX = 250;
+                int upperRightY = 525;
 
-                double newLLY = r.LLY + (r.Height - newHeight);
-                page.MediaBox = new Aspose.Pdf.Rectangle(newLLX, newLLY, newLLX + newWidth, newLLY + newHeight);
-                page.CropBox = new Aspose.Pdf.Rectangle(newLLX, newLLY, newLLX + newWidth, newLLY + newHeight);
+                FileStream imageStream = new FileStream(imgDir + "tLevel-logo.jpg", FileMode.Open);
+
+                page.Resources.Images.Add(imageStream);
+
+                page.Contents.Add(new Aspose.Pdf.Operators.GSave());
+
+                Rectangle rectangle = new Rectangle(lowerLeftX, lowerLeftY, upperRightX, upperRightY);
+                Matrix matrix = new Matrix(new double[] { rectangle.URX - rectangle.LLX, 0, 0, rectangle.URY - rectangle.LLY, rectangle.LLX, rectangle.LLY });
+
+                page.Contents.Add(new Aspose.Pdf.Operators.ConcatenateMatrix(matrix));
+                XImage ximage = page.Resources.Images[page.Resources.Images.Count];
+
+                page.Contents.Add(new Aspose.Pdf.Operators.Do(ximage.Name));
+                page.Contents.Add(new Aspose.Pdf.Operators.GRestore());
 
                 Table table = new Table();
                 SetTableProperties(table);
 
                 page.Paragraphs.Add(GetTable(Learners[i], table));
+                page.Paragraphs[0].Margin = new MarginInfo() { Top = 50 };
             }
 
             var path = dataDir + $"{outputFilename}.pdf";
@@ -75,7 +89,7 @@ namespace Aspose.Pdf.Examples.CSharp.AsposePDF.Tables
             }));
 
             table.Rows.Add(new HeaderRow().GetRow(new List<RowProperty>() {
-                { new RowProperty() { Name="T-Level", ColSpan = 3 } }
+                { new RowProperty() { Name="T Level", ColSpan = 3 } }
             }));
 
             table.Rows.Add(new ValueRow().GetRow(new List<RowProperty>() {
@@ -258,10 +272,25 @@ namespace Aspose.Pdf.Examples.CSharp.AsposePDF.Tables
             return table;
         }
 
+        private static void SetupPageProperties(Page page)
+        {
+            page.PageInfo.IsLandscape = true;
+
+            Aspose.Pdf.Rectangle r = page.MediaBox;
+            double newHeight = r.Width;
+            double newWidth = r.Height;
+            double newLLX = r.LLX;
+
+            double newLLY = r.LLY + (r.Height - newHeight);
+            page.MediaBox = new Aspose.Pdf.Rectangle(newLLX, newLLY, newLLX + newWidth, newLLY + newHeight);
+            page.CropBox = new Aspose.Pdf.Rectangle(newLLX, newLLY, newLLX + newWidth, newLLY + newHeight);
+        }
+
         private void SetTableProperties(Table table)
         {
             table.ColumnWidths = "150 150 150";
             table.ColumnAdjustment = ColumnAdjustment.AutoFitToWindow;
+            table.VerticalAlignment = VerticalAlignment.Bottom;
 
             table.DefaultCellTextState = new Pdf.Text.TextState("Arial", 8f);
             table.DefaultCellBorder = new Aspose.Pdf.BorderInfo(Aspose.Pdf.BorderSide.All, 0.1f);
@@ -269,8 +298,8 @@ namespace Aspose.Pdf.Examples.CSharp.AsposePDF.Tables
 
             Aspose.Pdf.MarginInfo margin = new Aspose.Pdf.MarginInfo();
             margin.Top = 5f;
-            margin.Left = 5f;
-            margin.Right = 5f;
+            margin.Left = 4f;
+            margin.Right = 4f;
             margin.Bottom = 5f;
 
             table.DefaultCellPadding = margin;

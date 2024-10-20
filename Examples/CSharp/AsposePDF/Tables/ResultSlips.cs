@@ -17,9 +17,9 @@ namespace Aspose.Pdf.Examples.CSharp.AsposePDF.Tables
             Learners = new List<Learner>()
             {
                 new Learner() { Name = "Russel Crowe", Uln = 4444444444 },
-                //new Learner() { Name = "Ricky Ponting", Uln = 5555555555 },
-                //new Learner() { Name = "Sylvester Stallone", Uln = 3333333333 },
-                //new Learner() { Name = "Imran Khan", Uln = 1111111111 }
+                new Learner() { Name = "Ricky Ponting", Uln = 5555555555 },
+                new Learner() { Name = "Sylvester Stallone", Uln = 3333333333 },
+                new Learner() { Name = "Imran Khan", Uln = 1111111111 }
             };
         }
 
@@ -39,20 +39,21 @@ namespace Aspose.Pdf.Examples.CSharp.AsposePDF.Tables
                 int upperRightX = 250;
                 int upperRightY = 525;
 
-                FileStream imageStream = new FileStream(imgDir + "tLevel-logo.jpg", FileMode.Open);
+                using (FileStream imageStream = new FileStream(imgDir + "tLevel-logo.jpg", FileMode.Open))
+                {
+                    page.Resources.Images.Add(imageStream);
 
-                page.Resources.Images.Add(imageStream);
+                    page.Contents.Add(new Aspose.Pdf.Operators.GSave());
 
-                page.Contents.Add(new Aspose.Pdf.Operators.GSave());
+                    Rectangle rectangle = new Rectangle(lowerLeftX, lowerLeftY, upperRightX, upperRightY);
+                    Matrix matrix = new Matrix(new double[] { rectangle.URX - rectangle.LLX, 0, 0, rectangle.URY - rectangle.LLY, rectangle.LLX, rectangle.LLY });
 
-                Rectangle rectangle = new Rectangle(lowerLeftX, lowerLeftY, upperRightX, upperRightY);
-                Matrix matrix = new Matrix(new double[] { rectangle.URX - rectangle.LLX, 0, 0, rectangle.URY - rectangle.LLY, rectangle.LLX, rectangle.LLY });
+                    page.Contents.Add(new Aspose.Pdf.Operators.ConcatenateMatrix(matrix));
+                    XImage ximage = page.Resources.Images[page.Resources.Images.Count];
 
-                page.Contents.Add(new Aspose.Pdf.Operators.ConcatenateMatrix(matrix));
-                XImage ximage = page.Resources.Images[page.Resources.Images.Count];
-
-                page.Contents.Add(new Aspose.Pdf.Operators.Do(ximage.Name));
-                page.Contents.Add(new Aspose.Pdf.Operators.GRestore());
+                    page.Contents.Add(new Aspose.Pdf.Operators.Do(ximage.Name));
+                    page.Contents.Add(new Aspose.Pdf.Operators.GRestore());
+                }
 
                 Table table = new Table();
                 SetTableProperties(table);
